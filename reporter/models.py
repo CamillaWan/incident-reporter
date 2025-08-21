@@ -11,10 +11,23 @@ class Incident(models.Model):
         ('other', 'Other'),
     ]
 
-    incident_type = models.CharField(max_length=20, choices=INCIDENT_TYPES)
-    description = models.TextField()
-    reporter = models.CharField(max_length=100)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    SEVERITY_LEVELS = [
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High'),
+        ('critical', 'Critical'),
+    ]
+
+    timestamp = models.DateTimeField(auto_now_add=True)  # Date & Time
+    incident_type = models.CharField(max_length=20, choices=INCIDENT_TYPES)  # Type
+    severity = models.CharField(max_length=10, choices=SEVERITY_LEVELS)  # Severity
+    location = models.CharField(max_length=255)  # Location
+    resident = models.CharField(max_length=255)  # Resident
+    description = models.TextField()  # Description
+    reporter = models.CharField(max_length=255)  # Reporter
+
+    class Meta:
+        ordering = ['-timestamp'] 
 
     def __str__(self):
-        return f"{self.get_incident_type_display()} by {self.reporter} at {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
+        return f"{self.get_incident_type_display()} - {self.get_severity_display()} at {self.timestamp:%Y-%m-%d %H:%M}"
