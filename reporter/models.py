@@ -6,7 +6,7 @@ class Incident(models.Model):
         ('medication', 'Medication Error'),
         ('behavioral', 'Behavioral'),
         ('equipment', 'Equipment Failure'),
-        ('infection', 'Infection Control'),
+        ('infection', 'Infection'),
         ('injury', 'Injury'),
         ('other', 'Other'),
     ]
@@ -30,4 +30,4 @@ class Incident(models.Model):
         ordering = ['-timestamp'] 
 
     def __str__(self):
-        return f"{self.get_incident_type_display()} - {self.get_severity_display()} at {self.timestamp:%Y-%m-%d %H:%M}"
+        return f"{self.get_incident_type_display()} - {self.get_severity_display()} at {self.timestamp:%d-%m-%Y-%H:%M}"

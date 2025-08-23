@@ -1,0 +1,25 @@
+<!-- reporter/templates/reporter/list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Incident Reporter</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+    <h1>Incident Reporter</h1>
+
+    <!-- Incident Form -->
+    <form hx-post="{% url 'add_incident' %}" hx-target="#incident-table" hx-swap="outerHTML">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Add Incident</button>
+    </form>
+
+    <!-- Incident Table -->
+    <div id="incident-table" hx-get="{% url 'load_more_incidents' %}?offset=0" hx-trigger="load">
+        {% include 'reporter/partials/incident_table.html' %}
+    </div>
+</body>
+</html>

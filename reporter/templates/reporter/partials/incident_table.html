@@ -1,0 +1,25 @@
+<!-- reporter/templates/reporter/partials/incident_table.html -->
+<table>
+    <thead>
+        <tr>           
+            <th>Type</th>
+            <th>Severity</th>
+            <th>Location</th>
+            <th>Resident</th>
+            <th>Description</th>
+            <th>Reporter</th>
+            <th>Date & Time</th>
+        </tr>
+    </thead>
+    <tbody id="incident-rows">
+        {% include 'reporter/partials/incident_rows.html' %}
+    </tbody>
+</table>
+
+<!-- Load More Button -->
+<button 
+    hx-get="{% url 'load_more_incidents' %}?offset={{ incidents|length }}" 
+    hx-target="#incident-rows" 
+    hx-swap="afterend">
+    Load More
+</button>
