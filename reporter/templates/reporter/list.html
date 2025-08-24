@@ -8,18 +8,29 @@
     <script src="https://unpkg.com/alpinejs" defer></script>
 </head>
 <body>
-    <h1>Incident Reporter</h1>
+    <header>
+        <h1>Incident Reporter</h1>
+        <p>Helping staff stay informed, residents stay safe.</p>
+    </header>
+    <section>
+         <!-- Incident Form -->
+        <form hx-post="{% url 'add_incident' %}" hx-target="#incident-table" hx-swap="outerHTML">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit">Submit Incident</button>
+        </form>
+    </section>
 
-    <!-- Incident Form -->
-    <form hx-post="{% url 'add_incident' %}" hx-target="#incident-table" hx-swap="outerHTML">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Add Incident</button>
-    </form>
+    <section>
+        <!-- Incident Table -->    
+        <div id="incident-table">
+            {% include 'reporter/partials/incident_table.html' %}    
+        </div>
+    </section>
+    <footer>
+        <small>Helping staff stay informed, residents stay safe.</small> </br>
+        <small>Built with ❤️ by Camilla Wan</small>
+    </footer>
 
-    <!-- Incident Table -->
-    <div id="incident-table" hx-get="{% url 'load_more_incidents' %}?offset=0" hx-trigger="load">
-        {% include 'reporter/partials/incident_table.html' %}
-    </div>
 </body>
 </html>

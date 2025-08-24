@@ -1,12 +1,13 @@
 <!-- reporter/templates/reporter/partials/incident_rows.html -->
 {% for incident in incidents %}
 <tr>
+    <td>{{ incident.incident_date_time|date:"d M, Y H:i" }}</td>
     <td>{{ incident.incident_type }}</td>
     <td>{{ incident.severity }}</td>
     <td>{{ incident.location }}</td>
     <td>{{ incident.resident }}</td>
     <td>{{ incident.description }}</td>
     <td>{{ incident.reporter }}</td>
-    <td>{{ incident.timestamp }}</td>
+    <td>{{ incident.timestamp|date:"d M, Y H:i" }}</td>
 </tr>
 {% endfor %}

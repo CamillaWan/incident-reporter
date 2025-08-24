@@ -2,20 +2,20 @@ from django.db import models
 
 class Incident(models.Model):
     INCIDENT_TYPES = [
-        ('fall', 'Fall'),
-        ('medication', 'Medication Error'),
-        ('behavioral', 'Behavioral'),
-        ('equipment', 'Equipment Failure'),
-        ('infection', 'Infection'),
-        ('injury', 'Injury'),
-        ('other', 'Other'),
+        ('Fall', 'Fall'),
+        ('Medication', 'Medication Error'),
+        ('Behavioral', 'Behavioral'),
+        ('Equipment', 'Equipment Failure'),
+        ('Infection', 'Infection'),
+        ('Injury', 'Injury'),
+        ('Other', 'Other'),
     ]
 
     SEVERITY_LEVELS = [
-        ('low', 'Low'),
-        ('medium', 'Medium'),
-        ('high', 'High'),
-        ('critical', 'Critical'),
+        ('Low', 'Low'),
+        ('Medium', 'Medium'),
+        ('High', 'High'),
+        ('Critical', 'Critical'),
     ]
 
     timestamp = models.DateTimeField(auto_now_add=True)  # Date & Time
@@ -25,6 +25,8 @@ class Incident(models.Model):
     resident = models.CharField(max_length=255)  # Resident
     description = models.TextField()  # Description
     reporter = models.CharField(max_length=255)  # Reporter
+    incident_date_time = models.DateTimeField(null=True, blank=True)  # Incident Date & Time
+    
 
     class Meta:
         ordering = ['-timestamp'] 

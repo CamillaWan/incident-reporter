@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Incident
 from .forms import IncidentForm
 
+
 def incident_list(request):
     incidents = Incident.objects.all()[:5]  # Fetch the first 5 incidents
     form = IncidentForm()
