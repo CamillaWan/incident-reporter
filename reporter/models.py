@@ -26,7 +26,8 @@ class Incident(models.Model):
     description = models.TextField()  # Description
     reporter = models.CharField(max_length=255)  # Reporter
     incident_date_time = models.DateTimeField(null=True, blank=True)  # Incident Date & Time
-    
+    reported_to_manager = models.BooleanField(default=False)  # Reported to Manager
+    actions_taken = models.TextField(null=True, blank=True)  # Actions Taken
 
     class Meta:
         ordering = ['-timestamp'] 

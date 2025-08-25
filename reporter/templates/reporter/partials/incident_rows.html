@@ -7,7 +7,22 @@
     <td>{{ incident.location }}</td>
     <td>{{ incident.resident }}</td>
     <td>{{ incident.description }}</td>
+    <td>{{ incident.actions_taken }}</td>
     <td>{{ incident.reporter }}</td>
+    <td>{{ incident.reported_to_manager|yesno:"✅,❌" }}</td>
     <td>{{ incident.timestamp|date:"d M, Y H:i" }}</td>
 </tr>
 {% endfor %}
+
+{% if has_more %}
+  <script>
+    const btn = document.getElementById('load-more-btn');
+    if (btn) {
+      btn.setAttribute('hx-get', `{% url 'load_more_incidents' %}?offset={{ next_offset }}`);
+    }
+  </script>
+{% else %}
+  <script>
+    document.getElementById('load-more-wrapper')?.remove();
+  </script>
+{% endif %}
