@@ -18,16 +18,19 @@
     <tbody id="incident-rows">
         {% include 'reporter/partials/incident_rows.html' %}
     </tbody>
+    
+        <tfoot>
+            <tr id="load-more-row" hx-swap-oob="true">
+                <td colspan="2">
+                    <button 
+                    hx-get="{% url 'load_more_incidents' %}?page={{ next_page }}"
+                    hx-target="#incident-rows"
+                    hx-swap="beforeend">
+                    Load More
+                    </button>
+                </td>
+            </tr>
+        </tfoot>
+    
 </table>
 
-<!-- Load More Button -->
-<div id="load-more-wrapper" hx-swap-oob="true">
-  {% if has_more %}
-    <button id="load-more-btn"
-            hx-get="{% url 'load_more_incidents' %}?offset={{ next_offset }}"
-            hx-target="#incident-rows"
-            hx-swap="afterend">
-      Load More
-    </button>
-  {% endif %}
-</div>

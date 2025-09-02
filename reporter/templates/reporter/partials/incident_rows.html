@@ -14,15 +14,4 @@
 </tr>
 {% endfor %}
 
-{% if has_more %}
-  <script>
-    const btn = document.getElementById('load-more-btn');
-    if (btn) {
-      btn.setAttribute('hx-get', `{% url 'load_more_incidents' %}?offset={{ next_offset }}`);
-    }
-  </script>
-{% else %}
-  <script>
-    document.getElementById('load-more-wrapper')?.remove();
-  </script>
-{% endif %}
+
