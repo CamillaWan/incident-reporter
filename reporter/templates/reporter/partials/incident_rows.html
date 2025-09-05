@@ -14,4 +14,15 @@
 </tr>
 {% endfor %}
 
-
+{% if has_next %}
+<tr id="load-more-row">
+    <td colspan="2">
+        <button 
+            hx-get="{% url 'load_more_incidents' %}?page={{ next_page }}"
+            hx-target="#load-more-row"
+            hx-swap="outerHTML">
+            Load More
+        </button>
+    </td>
+</tr>
+{% endif %}
